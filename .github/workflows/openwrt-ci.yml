@@ -839,6 +839,7 @@ jobs:
           CONFIG_PACKAGE_kmod-rtl8187=y
           CONFIG_PACKAGE_kmod-rtl8192c-common=y
           CONFIG_PACKAGE_kmod-rtl8192ce=y
+          CONFIG_PACKAGE_kmod-rtl8192eu=y
           CONFIG_PACKAGE_kmod-rtl8192cu=y
           CONFIG_PACKAGE_kmod-rtl8192de=y
           CONFIG_PACKAGE_kmod-rtl8192se=y
