@@ -63,10 +63,28 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a 
-      - name: Coutom
+
+      - name: Generate configuration file
         run: |
-         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          #rm -f ./.config*
+          rm -rf ./tmp && rm -rf .config
+          touch ./.config
+
+          #
+          # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
+          # 例如:
+
+          cat >> .config <<EOF
+          EOF
+
+          #
+          # ===============================================================
+          # 
+
+          sed -i 's/^[ \t]*//g' ./.config
+          #make defconfig
+          make menuconfig
+
       - name: Make download
         run: |
           make download -j8 || make download -j1 V=s
