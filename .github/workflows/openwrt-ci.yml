@@ -64,10 +64,20 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a 
 
+      - name : Delte Temp
+        run: |
+          rm -rf ./tmp && rm -rf .config
+
+      - name: SSH connection to Actions
+        uses: P3TERX/ssh2actions@v1.0.0
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          
       - name: Generate configuration file
         run: |
           #rm -f ./.config*
-          rm -rf ./tmp && rm -rf .config
+          
           touch ./.config
 
           #
@@ -83,7 +93,7 @@ jobs:
 
           sed -i 's/^[ \t]*//g' ./.config
           #make defconfig
-          make menuconfig
+          make -j$(($(nproc) + 1)) V=s
 
       - name: Make download
         run: |
