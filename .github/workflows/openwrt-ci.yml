@@ -55,10 +55,6 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a 
 
-      - name : Delte Temp
-        run: |
-          rm -rf ./tmp && rm -rf .config
-
       - name: SSH connection to Actions
         uses: P3TERX/ssh2actions@v1.0.0
         env:
